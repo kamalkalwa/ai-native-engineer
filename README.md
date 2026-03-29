@@ -29,11 +29,11 @@ Five skills included: [`assess`](skills/assess/SKILL.md) · [`audit`](skills/aud
 
 | Layer | What It Does | For Whom |
 |-------|-------------|---------|
-| **[`assess/`](assess/)** | Interactive self-assessment — browser quiz or `/assess` skill | Engineers who want to know where to start |
-| **[`skills/`](skills/)** | Drop-in Claude Code skills — install and run with a slash command | Engineers who want to use it now |
-| **[`levels/`](levels/)** | CLAUDE.md configs that change how AI tools behave at each maturity level | Engineers who want their tools to grow with them |
-| **[`workflows/`](workflows/)** | 6 workflow guides: spec-driven dev, context engineering, codebase audit, multi-file refactor, test generation, PR workflow | Engineers who want to understand the "why" |
-| **[`migration-plan/`](migration-plan/)** | 4-week plan with daily exercises to transition from AI-unaware to AI-native | Engineers who want a structured path |
+| **[`levels/`](levels/)** | Drop-in CLAUDE.md configs that change how AI tools behave — Level 1 coaches you, Level 3 gets out of your way | Start here after the diagnostic |
+| **[`skills/`](skills/)** | 5 installable Claude Code skills — run a slash command, get value in 60 seconds | Engineers who want to use it now |
+| **[`assess/`](assess/)** | Scenario-based diagnostic — browser quiz or `/assess` skill | Engineers who want to know where they stand |
+| **[`workflows/`](workflows/)** | 6 detailed guides: spec-driven dev, context engineering, codebase audit, multi-file refactor, test generation, PR workflow | Engineers who want the "why" behind each skill |
+| **[`migration-plan/`](migration-plan/)** | 4-week plan with daily exercises | Engineers who want a structured learning path |
 
 ---
 
@@ -226,7 +226,7 @@ Saved:  3 headcount worth of budget → reinvested in AI tooling/roles
 The roles that get cut: engineers whose daily work is mostly delegatable to AI.
 The roles that get hired: engineers who can orchestrate AI to do that work.
 
-**The uncomfortable implication:** The question isn't whether your team will restructure. The question is which side of the equation you're on when it does.
+This is the math companies are running. You don't have to agree with it — reducing engineers to output units ignores everything that makes teams work. But you need to know the math exists, because it's driving hiring and restructuring decisions whether we like it or not.
 
 ---
 

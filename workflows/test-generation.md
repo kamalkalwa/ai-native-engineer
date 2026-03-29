@@ -204,37 +204,38 @@ Rules:
 Testing framework: vitest
 ```
 
-### AI output (after 30% rewrite)
+### What to expect from AI output
 
-The AI generated 24 tests. Here's what changed during review:
+For a module like this, AI will typically generate 20-30 tests. Here's the pattern you'll see:
 
-**Kept as-is (17 tests):**
-- All happy-path tests — AI correctly asserted on return values
+**Keep as-is (~70%):**
+- Happy-path tests that assert on return values
 - Invalid input tests (negative amount, empty currency, nonexistent customer)
 - Pagination edge cases (empty results, last page)
 
-**Rewrote assertions (5 tests):**
-- Changed `expect(mockStripe.charges.create).toHaveBeenCalledTimes(1)` to asserting the returned charge has the correct amount and status
-- Changed `expect(result).toBeDefined()` to `expect(result).toEqual({ id: expect.any(String), amount: 4999, currency: "usd", status: "succeeded" })`
-- Changed snapshot assertion on payment history to explicit field assertions
-- Changed `expect(mockEmail.send).toHaveBeenCalled()` to `expect(mockEmail.send).toHaveBeenCalledWith(expect.objectContaining({ to: "customer@example.com", template: "payment-receipt", data: { amount: "$49.99" } }))`
-- Changed `expect(error).toBeTruthy()` to `expect(error.message).toContain("Insufficient funds for customer cus_123")`
+**Rewrite assertions (~20-30%):**
+- `toHaveBeenCalledTimes(1)` → assert the returned object has the correct values instead
+- `toBeDefined()` → `toEqual({ id: expect.any(String), amount: 4999, currency: "usd", status: "succeeded" })`
+- Snapshot assertions → explicit field assertions
+- `toHaveBeenCalled()` → `toHaveBeenCalledWith(expect.objectContaining({ to: "...", template: "..." }))`
+- `toBeTruthy()` → `toContain("Insufficient funds for customer cus_123")`
 
-**Deleted (2 tests):**
-- "should call database.saveCharge with correct parameters" — tested implementation, not behavior
-- "should not call emailService if charge fails" — tested ordering of side effects, not outcomes
+**Delete (~5-10%):**
+- Tests that only verify mock call parameters (testing implementation, not behavior)
+- Tests that check side-effect ordering rather than outcomes
 
-**Added manually (3 tests):**
-- Idempotency: charging with the same idempotency key returns the original charge
-- Currency handling: amount is correctly converted to smallest currency unit (cents for USD, yen for JPY)
-- Concurrent charges: two simultaneous charges for the same customer don't double-charge
+**Add manually (~2-3 tests):**
+- Idempotency: same request retried = same outcome
+- Currency/precision handling: edge cases AI rarely thinks of
+- Concurrency: two simultaneous requests don't cause double-processing
 
-### Final test file stats
+### Typical time
 
 ```
-Tests:       25 total (24 AI-generated, 5 assertions rewritten, 2 tests deleted, 3 added manually)
-Time spent:  28 minutes (8 min prompt + generation, 20 min review + rewrite)
-Equivalent manual effort: ~2.5 hours
+Prompt + generation:     5-10 min
+Review + rewrite:        15-20 min
+Total:                   ~30 min per module
+Equivalent manual effort: 2-3 hours
 ```
 
 ---

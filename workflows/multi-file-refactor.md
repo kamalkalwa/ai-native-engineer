@@ -217,35 +217,20 @@ Pick the 2-3 most critical paths through the application and test them manually.
 
 ### The codebase
 
-Consider an Express + TypeScript API service with 14 service files, each averaging 5-8 functions with try/catch blocks. ~70 total instances to transform.
+Consider an Express + TypeScript API service with ~15 service files, each averaging 5-8 functions with try/catch blocks. ~70 total instances to transform.
 
-### Typical timeline
+### What the workflow looks like
 
-| Step | Time | What Happened |
-|------|------|--------------|
-| Pattern inventory | 8 min | Claude Code found 73 instances across 14 files. 4 were in middleware (excluded). 3 had finally blocks (flagged for manual review). |
-| Define target pattern | 15 min | Wrote the Result type definition, transformation rules, and edge case handling. This was pure human work — designing the pattern. |
-| Apply to first 3 files | 20 min | Reviewed each transformation carefully. Found one issue: Claude Code was wrapping async calls in an extra try/catch instead of using `.catch()`. Corrected the prompt. |
-| Apply to remaining 11 files | 12 min | Batch mode. Claude Code flagged 2 files where the catch block modified external state (a cache invalidation). Handled those manually. |
-| Fix TypeScript errors | 15 min | 34 type errors, all in callers that expected the old return type. Claude Code fixed all 34. |
-| Fix test failures | 25 min | 19 test failures. Claude Code updated 16 automatically. 3 needed manual adjustment because they were testing that specific errors were thrown (now they test for `ok: false`). |
-| Lint + build | 5 min | 2 lint issues (unused imports from removed try/catch). Auto-fixed. Build passed. |
-| Manual smoke test | 15 min | Tested auth flow, payment flow, and user CRUD. All worked. |
-| **Total** | **~2 hours** | 73 instances transformed across 14 files. Would have taken 2-3 days manually. |
-
-### Files changed
-
-```
- 14 files changed, 847 insertions(+), 623 deletions(-)
- src/types/result.ts          | new file, 24 lines
- src/services/authService.ts  | 67 insertions, 49 deletions
- src/services/userService.ts  | 58 insertions, 42 deletions
- src/services/billingService.ts | 89 insertions, 61 deletions
- ... (11 more service files)
- src/routes/auth.ts           | 34 insertions, 21 deletions
- src/routes/users.ts          | 28 insertions, 18 deletions
- ... (6 more route files)
-```
+| Step | Typical Time | What Happens |
+|------|-------------|--------------|
+| Pattern inventory | 5-10 min | AI finds all instances. Some will be in middleware (exclude those). Some will have finally blocks (flag for manual review). |
+| Define target pattern | 15 min | You write the Result type definition, transformation rules, and edge case handling. This is human work — designing the pattern. |
+| Apply to first 3 files | 15-20 min | Review each transformation. Watch for: AI wrapping async calls in extra try/catch instead of using `.catch()`. Correct the prompt if needed. |
+| Apply to remaining files | 10-15 min | Batch mode. AI flags files where the catch block modifies external state (cache invalidation, metrics). Handle those manually. |
+| Fix type errors | 10-15 min | Callers that expected the old return type will break. AI can fix these mechanically. |
+| Fix test failures | 15-25 min | Tests that asserted specific errors were thrown need updating to test for `ok: false` instead. |
+| Lint + build + smoke test | 15-20 min | Run checks, test 2-3 critical user flows manually. |
+| **Total** | **~2 hours** | Compare to 2-3 days of manual refactoring for the same scope. |
 
 ---
 
