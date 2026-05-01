@@ -32,7 +32,7 @@ Five skills included: [`assess`](skills/assess/SKILL.md) · [`audit`](skills/aud
 | **[`levels/`](levels/)** | Drop-in CLAUDE.md configs that change how AI tools behave — Level 1 coaches you, Level 3 gets out of your way | Start here after the diagnostic |
 | **[`skills/`](skills/)** | 5 installable Claude Code skills — run a slash command, get value in 60 seconds | Engineers who want to use it now |
 | **[`assess/`](assess/)** | Scenario-based diagnostic — browser quiz or `/assess` skill | Engineers who want to know where they stand |
-| **[`workflows/`](workflows/)** | 12 detailed guides covering the gap-closing senior PE patterns: harness engineering, CLAUDE.md as kill log, parallel agents, always-running agents, validate-don't-generate, spec-driven, context engineering, plus 5 task-specific workflows | Engineers who want the "why" behind each skill |
+| **[`workflows/`](workflows/)** | 6 detailed guides: spec-driven dev, context engineering, codebase audit, multi-file refactor, test generation, PR workflow | Engineers who want the "why" behind each skill |
 | **[`migration-plan/`](migration-plan/)** | 4-week plan with daily exercises | Engineers who want a structured learning path |
 
 ---
