@@ -32,8 +32,33 @@ Five skills included: [`assess`](skills/assess/SKILL.md) · [`audit`](skills/aud
 | **[`levels/`](levels/)** | Drop-in CLAUDE.md configs that change how AI tools behave — Level 1 coaches you, Level 3 gets out of your way | Start here after the diagnostic |
 | **[`skills/`](skills/)** | 5 installable Claude Code skills — run a slash command, get value in 60 seconds | Engineers who want to use it now |
 | **[`assess/`](assess/)** | Scenario-based diagnostic — browser quiz or `/assess` skill | Engineers who want to know where they stand |
-| **[`workflows/`](workflows/)** | 6 detailed guides: spec-driven dev, context engineering, codebase audit, multi-file refactor, test generation, PR workflow | Engineers who want the "why" behind each skill |
+| **[`workflows/`](workflows/)** | 12 detailed guides covering the gap-closing senior PE patterns: harness engineering, CLAUDE.md as kill log, parallel agents, always-running agents, validate-don't-generate, spec-driven, context engineering, plus 5 task-specific workflows | Engineers who want the "why" behind each skill |
 | **[`migration-plan/`](migration-plan/)** | 4-week plan with daily exercises | Engineers who want a structured learning path |
+
+---
+
+## Start Here: The Productivity Gap
+
+You have Claude Code, Cursor, Codex, parallel agents, MCP servers, a $200/month Claude subscription. You use them every day. **The investment is real. The return isn't.**
+
+Six independent studies put organizational productivity gains at ~10%. METR's randomized trial put senior engineers at -19% (revised to -4% in Feb 2026). NBER surveyed 6,000 executives — 80% report no impact in 3 years. Veracode: 45% of AI-generated code has OWASP Top 10 vulnerabilities. GitClear: code churn doubled.
+
+**The 10% average is hiding a 5x distribution.** Senior PEs with deliberate workflows are getting 1.6–2x leverage. Most engineers are getting nothing.
+
+This isn't a tool problem. It's a workflow problem. **[Read the full frame →](workflows/the-productivity-gap.md)**
+
+The six gap-closing patterns, ranked by leverage-to-effort:
+
+| Pattern | What it is | Time to ship | File |
+|---|---|---|---|
+| **CLAUDE.md as kill log** | Karpathy's pattern — institutional memory in one file. Took accuracy 65% → 94%. | 30 min | [claude-md-as-kill-log.md](workflows/claude-md-as-kill-log.md) |
+| **Harness engineering** | Hashimoto's term. OpenAI built ~1M lines / 5 months / 3 engineers / 1,500 PRs / zero hand-written code on this pattern. | 2 hours | [harness-engineering.md](workflows/harness-engineering.md) |
+| **Spec-first / Plan Mode** | Collapse 20 ambiguous decisions into a reviewed artifact before any code. | 15-30 min/feature | [spec-driven.md](workflows/spec-driven.md) |
+| **Validate-don't-generate** | Sean Goedecke (GitHub Copilot staff) discipline. AI verifies the decision you already made. | Behavior change | [validate-dont-generate.md](workflows/validate-dont-generate.md) |
+| **Always-running agents** | Hashimoto's rule. *"If I'm coding, an agent is planning. If they're coding, I'm reviewing."* | 1 hour | [always-running-agents.md](workflows/always-running-agents.md) |
+| **Parallel agents on git worktrees** | DHH's setup — Gemini K25 + Claude Opus in tmux, dual-model review. Practical ceiling: 5–7. | 10 min setup | [parallel-agents.md](workflows/parallel-agents.md) |
+
+> **Compute is what you bought. Workflow is what you build.**
 
 ---
 
